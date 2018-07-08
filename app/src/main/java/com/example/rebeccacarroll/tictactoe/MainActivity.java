@@ -6,15 +6,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int[] game =    { 0,0,0,
+    public int[] game =    { 0,0,0,
                               0,0,0,
                               0,0,0};
 
-    private int[] tiles = {R.id.tile0, R.id.tile1,R.id.tile2,R.id.tile3,R.id.tile4,R.id.tile5,R.id.tile6,R.id.tile7,R.id.tile8};
+    public int[] tiles = {R.id.tile0, R.id.tile1,R.id.tile2,R.id.tile3,R.id.tile4,R.id.tile5,R.id.tile6,R.id.tile7,R.id.tile8};
     public int player = 1;
+    public int numMoves = 0;
+    public Boolean humanMode = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,36 +33,47 @@ public class MainActivity extends AppCompatActivity {
     }
     private void init(){
         updateBoard();
+        numMoves = 0;
+        player = 1;
+
 
         for(int i: tiles){
             ImageView tiles  = findViewById(i);
             tiles.setOnClickListener(tileListener);
         }
+        for(int g: tiles){
+            g = 0;
+        }
     }
     private void move(){
+        numMoves++;
         //toggle player
-        checkWin();
-
-        ImageView v = findViewById(R.id.player);
-        if(player == 1){
-            player = 0;
-            v.setImageResource(R.drawable.player1);
-        }else{
-            player = 1;
-            v.setImageResource(R.drawable.player2);
+        if(!checkWin()) {
+            ImageView v = findViewById(R.id.player);
+            if (player == 1) {
+                player = 2;
+                v.setImageResource(R.drawable.player2);
+            } else {
+                player = 1;
+                v.setImageResource(R.drawable.player1);
+            }
         }
 
     }
-    private void checkWin(){
 
-    }
     public View.OnClickListener tileListener  =  new View.OnClickListener() {
         public void onClick(View v) {
             ImageView tile = (ImageView) v;
-            if(player == 1){
-                tile.setImageResource(R.drawable.x);
-            }else{
+            int tileSelected = Integer.parseInt((String)tile.getTag());
+            if(player == 2){
                 tile.setImageResource(R.drawable.o);
+                game[tileSelected] = 1;
+                Log.d("STATE",  tile.getTag()+ "    player1");
+            }else{
+                tile.setImageResource(R.drawable.x);
+                game[tileSelected] = -1;
+                //game[Arrays.asList(tiles).indexOf(v)] = 1;
+                Log.d("STATE",  tile.getTag()+"    player2");
             }
             move();
         }
@@ -76,4 +92,61 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    private void endGame(Boolean win){
+        ImageView banner = findViewById(R.id.player);
+        if(win){
+            //who won?
+            if(player == 1){
+                //player 1 won
+                banner.setImageResource(R.drawable.p1wins);
+            }else{
+                //player 2 won
+                banner.setImageResource(R.drawable.p2wins);
+            }
+            Log.d("STATE","win");
+        }else{
+            //tie
+            banner.setImageResource(R.drawable.noonewins);
+            Log.d("STATE"," tie");
+        }
+        for(int i: tiles){
+            ImageView tiles  = findViewById(i);
+            tiles.setOnClickListener(null);
+        }
+    }
+    private Boolean checkWin(){
+        //horizontal checks
+        if(game[0] != 0 && game[0] == game[1] && game[1] == game[2]){
+            endGame(true);
+            return true;
+        }else if (game[3] != 0 && game[3] == game[4] && game[4]== game[5]){
+            endGame(true);
+            return true;
+        }else if (game[6] != 0 && game[6] == game[7] && game[7] == game[8]){
+            endGame(true);
+            return true;
+        //vertical checks
+        }else if (game[0] != 0 && game[0] == game[3] && game[3] == game[6]){
+            endGame(true);
+            return true;
+        }else if (game[1] != 0 && game[1] == game[4] && game[4] == game[7]){
+            endGame(true);
+            return true;
+        }else if (game[2] != 0 && game[2] == game[5] && game[5] == game[8]){
+            endGame(true);
+            return true;
+        //diagonal checks
+        }else if (game[0] != 0 && game[0] == game[4] && game[4] == game[8]){
+            endGame(true);
+            return true;
+        }else if (game[2] != 0 && game[2] == game[4] && game[4] == game[6]){
+            endGame(true);
+            return true;
+        }else if(numMoves > 8){
+            endGame(false);
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="21dp"
         android:layout_marginTop="173dp"
+        android:tag="0"
         app:layout_constraintEnd_toStartOf="@+id/tile1"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tile" />
@@ -58,6 +59,7 @@
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:tag="1"
         app:layout_constraintBottom_toTopOf="@+id/tile4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginTop="173dp"
+        android:tag="2"
         app:layout_constraintStart_toEndOf="@+id/tile1"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tile" />
@@ -79,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="21dp"
         android:layout_marginTop="17dp"
+        android:tag="3"
         app:layout_constraintEnd_toStartOf="@+id/tile4"
         app:layout_constraintTop_toBottomOf="@+id/tile0"
         app:srcCompat="@drawable/tile" />
@@ -91,6 +95,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:tag="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/board"
@@ -103,6 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
+        android:tag="5"
         app:layout_constraintStart_toEndOf="@+id/tile4"
         app:layout_constraintTop_toBottomOf="@+id/tile2"
         app:srcCompat="@drawable/tile" />
@@ -113,6 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="21dp"
         android:layout_marginTop="17dp"
+        android:tag="6"
         app:layout_constraintEnd_toStartOf="@+id/tile7"
         app:layout_constraintTop_toBottomOf="@+id/tile3"
         app:srcCompat="@drawable/tile" />
@@ -124,6 +131,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="17dp"
+        android:tag="7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tile4"
@@ -135,6 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
+        android:tag="8"
         app:layout_constraintStart_toEndOf="@+id/tile7"
         app:layout_constraintTop_toBottomOf="@+id/tile5"
         app:srcCompat="@drawable/tile" />
@@ -170,5 +179,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/footer"
         tools:layout_editor_absoluteX="0dp" />
+
+    <Switch
+        android:id="@+id/mode_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:lineSpacingExtra="8sp"
+        android:text="Opponent Type:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/mode_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/human" />
 
 </android.support.constraint.ConstraintLayout>
