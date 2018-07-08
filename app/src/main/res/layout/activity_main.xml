@@ -10,128 +10,115 @@
         android:id="@+id/board"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/imgdesc1"
-        app:srcCompat="@mipmap/board"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:srcCompat="@drawable/board"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
         android:id="@+id/titlebar"
-        android:layout_width="414dp"
-        android:layout_height="46dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
         android:background="@color/colorPrimary"
         android:contentDescription="FSU Title Bar"
         android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="0dp" />
+        app:srcCompat="@color/colorPrimaryDark" />
 
     <ImageView
         android:id="@+id/fsulogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:contentDescription="Fsu Logo"
         app:layout_constraintStart_toStartOf="@+id/titlebar"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/torches_white" />
+        app:srcCompat="@drawable/torches_white" />
 
-    <TextView
-        android:id="@+id/TitleBarText"
-        android:layout_width="319dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Tic Tac Toe"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/board" />
+    <ImageView
+        android:id="@+id/tile0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        android:layout_marginTop="173dp"
+        app:layout_constraintEnd_toStartOf="@+id/tile1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
         android:id="@+id/tile1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="165dp"
-        app:layout_constraintEnd_toStartOf="@+id/tile2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tile" />
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tile4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
         android:id="@+id/tile2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tile5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/tile" />
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="173dp"
+        app:layout_constraintStart_toEndOf="@+id/tile1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
         android:id="@+id/tile3"
-        android:layout_width="wrap_content"
+        android:layout_width="105dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="165dp"
-        app:layout_constraintStart_toEndOf="@+id/tile2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tile" />
+        android:layout_marginEnd="21dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/tile4"
+        app:layout_constraintTop_toBottomOf="@+id/tile0"
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
         android:id="@+id/tile4"
-        android:layout_width="105dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/tile5"
-        app:layout_constraintTop_toBottomOf="@+id/tile1"
-        app:srcCompat="@mipmap/tile" />
-
-    <ImageView
-        android:id="@+id/tile5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/board"
-        app:layout_constraintTop_toTopOf="@+id/TitleBarText"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@mipmap/tile" />
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:srcCompat="@drawable/tile" />
+
+    <ImageView
+        android:id="@+id/tile5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintStart_toEndOf="@+id/tile4"
+        app:layout_constraintTop_toBottomOf="@+id/tile2"
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
         android:id="@+id/tile6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/tile5"
+        android:layout_marginEnd="21dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/tile7"
         app:layout_constraintTop_toBottomOf="@+id/tile3"
-        app:srcCompat="@mipmap/tile" />
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
         android:id="@+id/tile7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="17dp"
-        app:layout_constraintEnd_toStartOf="@+id/tile8"
-        app:layout_constraintTop_toBottomOf="@+id/tile4"
-        app:srcCompat="@mipmap/tile" />
-
-    <ImageView
-        android:id="@+id/tile8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -139,17 +126,27 @@
         android:layout_marginTop="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tile5"
-        app:srcCompat="@mipmap/tile" />
+        app:layout_constraintTop_toBottomOf="@+id/tile4"
+        app:srcCompat="@drawable/tile" />
 
     <ImageView
-        android:id="@+id/tile9"
+        android:id="@+id/tile8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
-        app:layout_constraintStart_toEndOf="@+id/tile8"
-        app:layout_constraintTop_toBottomOf="@+id/tile6"
-        app:srcCompat="@mipmap/tile" />
+        app:layout_constraintStart_toEndOf="@+id/tile7"
+        app:layout_constraintTop_toBottomOf="@+id/tile5"
+        app:srcCompat="@drawable/tile" />
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/title_blackbg"
+        tools:layout_editor_absoluteY="7dp" />
 
 </android.support.constraint.ConstraintLayout>
