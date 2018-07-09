@@ -147,6 +147,24 @@ public class MainActivity extends AppCompatActivity {
             se = whichEmpty(2, 4, 6);
         }
 
+        //check to see if center or outside squares are empty:
+        if(game[4]==0)
+        {
+            se = 4;
+        }else if(game[0] == 0)
+        {
+            se = 0;
+        }else if(game[2] == 0)
+        {
+            se = 2;
+        }else if(game[6] == 0)
+        {
+            se = 0;
+        }else if(game[8] == 0)
+        {
+            se = 0;
+        }
+
         if(se == -1){
             Log.d("STATE","random selection");
             //select random
