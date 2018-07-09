@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,14 +49,13 @@ public class MainActivity extends AppCompatActivity {
         //reset tiles
         for(int i: tiles){
             ImageView tiles  = findViewById(i);
+            Log.d("STATE","reset listener");
             tiles.setOnClickListener(tileListener);
             tiles.setImageResource(R.drawable.tile);
         }
         //reset game array
         for(int i=0;i<game.length; i++){
             game[i] = 0;
-            Log.d("STATE","resetting g");
-
         }
     }
     public CompoundButton.OnCheckedChangeListener modeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -65,50 +65,75 @@ public class MainActivity extends AppCompatActivity {
             if(b.isChecked()){
                 Log.d("STATE","checked");
                 mode.setImageResource(R.drawable.computer);
+                humanMode = false;
             }else{
                 Log.d("STATE","unchecked");
                 mode.setImageResource(R.drawable.human);
+                humanMode = true;
             }
         }
     };
     private void move(){
         numMoves++;
+
         //toggle player
         if(!checkWin()) {
             ImageView v = findViewById(R.id.player);
-            if (player == 1) {
+            //user move
+            if (player == 1 && humanMode) {
+                Log.d("STATE","human player 1 move");
                 player = 2;
                 v.setImageResource(R.drawable.player2);
-            } else {
+            //if human player2 move
+            } else if(player == 2 ){
+                Log.d("STATE","human player 2 move");
                 player = 1;
                 v.setImageResource(R.drawable.player1);
+            //if computer player2 move
+            }else if(player == 1){
+                Log.d("STATE","computer player 2 move");
+                player = 2;
+                v.setImageResource(R.drawable.player2);
+                computerMove();
             }
         }
-
     }
-
+    private void computerMove() {
+        Random rand = new Random();
+        int r = 0;
+        //find random empty tile
+        while ( game[r] != 0 ){
+            r = rand.nextInt(9);
+        }
+        Log.d("STATE","tile selected by computer: "+r);
+        ImageView tile = findViewById(tiles[r]);
+        tileClick(tile);
+    }
 
     public View.OnClickListener resetListener  =  new View.OnClickListener() {
         public void onClick(View v) {
             init();
         }
     };
+    public void tileClick(View v){
+        ImageView tile = (ImageView) v;
+        int tileSelected = Integer.parseInt((String)tile.getTag());
+        if(player == 2){
+            tile.setImageResource(R.drawable.o);
+            game[tileSelected] = 1;
+            Log.d("STATE",  tile.getTag()+ "    player1");
+        }else{
+            tile.setImageResource(R.drawable.x);
+            game[tileSelected] = -1;
+            //game[Arrays.asList(tiles).indexOf(v)] = 1;
+            Log.d("STATE",  tile.getTag()+"    player2");
+        }
+        tile.setOnClickListener(null);
+        move();
+    }
     public View.OnClickListener tileListener  =  new View.OnClickListener() {
         public void onClick(View v) {
-            ImageView tile = (ImageView) v;
-            int tileSelected = Integer.parseInt((String)tile.getTag());
-            if(player == 2){
-                tile.setImageResource(R.drawable.o);
-                game[tileSelected] = 1;
-                Log.d("STATE",  tile.getTag()+ "    player1");
-            }else{
-                tile.setImageResource(R.drawable.x);
-                game[tileSelected] = -1;
-                //game[Arrays.asList(tiles).indexOf(v)] = 1;
-                Log.d("STATE",  tile.getTag()+"    player2");
-            }
-            tile.setOnClickListener(null);
-            move();
+            tileClick(v);
         }
     };
     protected void updateBoard(){
@@ -126,14 +151,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void endGame(Boolean win){
+
         ImageView banner = findViewById(R.id.player);
         if(win){
+            Log.d("STATE","current player:"+player);
             //who won?
             if(player == 1){
                 //player 1 won
+                Log.d("STATE","1current player:"+player);
                 banner.setImageResource(R.drawable.p1wins);
             }else{
                 //player 2 won
+                Log.d("STATE","2current player:"+player);
                 banner.setImageResource(R.drawable.p2wins);
             }
             //Log.d("STATE","win");
