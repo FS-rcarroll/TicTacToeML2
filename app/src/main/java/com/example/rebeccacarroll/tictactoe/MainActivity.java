@@ -7,9 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,15 +96,71 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private void computerMove() {
-        Random rand = new Random();
-        int r = 0;
-        //find random empty tile
-        while ( game[r] != 0 ){
-            r = rand.nextInt(9);
+    private Boolean checkTwoTiles(int tile1, int tile2, int tile3, int p){
+       int tot = 2;
+        if(p == 1){
+            tot = -2;
         }
-        Log.d("STATE","tile selected by computer: "+r);
-        ImageView tile = findViewById(tiles[r]);
+        //check two tiles and return empty tile
+        if(game[tile1] + game[tile2] + game[tile3] == tot ){
+            return true;
+        }
+        return false;
+    }
+    private int whichEmpty(int tile1, int tile2, int tile3){
+        if(game[tile1] == 0)
+        {
+            return tile1;
+        }else if(game[tile2] == 0)
+        {
+            return tile2;
+        }else{
+            return tile3;
+        }
+    }
+    private void computerMove() {
+        int se = -1;
+        //check for two in a row to play
+
+        if(checkTwoTiles(0, 1, 2, 2)){
+            se = whichEmpty(0, 1, 2);
+        }else if(checkTwoTiles(3, 4, 5, 2)){
+            se = whichEmpty(3, 4, 5);
+        }else if(checkTwoTiles(6, 7, 8, 2)){
+            se = whichEmpty(6, 7, 8);
+        }else if(checkTwoTiles(0, 4, 8, 2)){
+            se = whichEmpty(0, 4, 8);
+        }else if(checkTwoTiles(2, 4, 6, 2)){
+            se = whichEmpty(2, 4, 6);
+        }
+
+        //check for two in a row of the opponent to block
+        if(checkTwoTiles(0, 1, 2, 1)){
+            se = whichEmpty(0, 1, 2);
+        }else if(checkTwoTiles(3, 4, 5, 1)){
+            se = whichEmpty(3, 4, 5);
+        }else if(checkTwoTiles(6, 7, 8, 1)){
+            se = whichEmpty(6, 7, 8);
+        }else if(checkTwoTiles(0, 4, 8, 1)){
+            se = whichEmpty(0, 4, 8);
+        }else if(checkTwoTiles(2, 4, 6, 1)){
+            se = whichEmpty(2, 4, 6);
+        }
+
+        if(se == -1){
+            Log.d("STATE","random selection");
+            //select random
+            se = 0;
+            Random rand = new Random();
+
+            //find random empty tile
+            while ( game[se] != 0 ){
+                se = rand.nextInt(9);
+            }
+        }
+
+        Log.d("STATE","tile selected by computer: "+se);
+        ImageView tile = findViewById(tiles[se]);
         tileClick(tile);
     }
 
