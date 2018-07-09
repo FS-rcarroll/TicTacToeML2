@@ -164,7 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="79dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -184,9 +184,8 @@
         android:id="@+id/mode_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="5dp"
         android:lineSpacingExtra="8sp"
         android:text="Opponent Type:"
         android:textSize="18sp"
@@ -199,10 +198,24 @@
         android:id="@+id/mode_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mode_switch"
         app:srcCompat="@drawable/human" />
+
+    <ImageView
+        android:id="@+id/play_again_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playagain" />
 
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-
         setContentView(R.layout.activity_main);
 
         init();
@@ -35,16 +35,42 @@ public class MainActivity extends AppCompatActivity {
         updateBoard();
         numMoves = 0;
         player = 1;
+        //remove reset button
+        findViewById(R.id.play_again_btn).setVisibility(View.INVISIBLE);
+        findViewById(R.id.play_again_btn).setOnClickListener(null);
+        //setup switch
+        CompoundButton sm = findViewById(R.id.mode_switch);
+        sm.setOnCheckedChangeListener(modeListener);
 
-
+        //set Player banner to player 1
+        ImageView v = findViewById(R.id.player);
+        v.setImageResource(R.drawable.player1);
+        //reset tiles
         for(int i: tiles){
             ImageView tiles  = findViewById(i);
             tiles.setOnClickListener(tileListener);
+            tiles.setImageResource(R.drawable.tile);
         }
-        for(int g: tiles){
-            g = 0;
+        //reset game array
+        for(int i=0;i<game.length; i++){
+            game[i] = 0;
+            Log.d("STATE","resetting g");
+
         }
     }
+    public CompoundButton.OnCheckedChangeListener modeListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton b, boolean isChecked) {
+            init();
+            ImageView mode  = findViewById(R.id.mode_type);
+            if(b.isChecked()){
+                Log.d("STATE","checked");
+                mode.setImageResource(R.drawable.computer);
+            }else{
+                Log.d("STATE","unchecked");
+                mode.setImageResource(R.drawable.human);
+            }
+        }
+    };
     private void move(){
         numMoves++;
         //toggle player
@@ -61,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public View.OnClickListener resetListener  =  new View.OnClickListener() {
+        public void onClick(View v) {
+            init();
+        }
+    };
     public View.OnClickListener tileListener  =  new View.OnClickListener() {
         public void onClick(View v) {
             ImageView tile = (ImageView) v;
@@ -75,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 //game[Arrays.asList(tiles).indexOf(v)] = 1;
                 Log.d("STATE",  tile.getTag()+"    player2");
             }
+            tile.setOnClickListener(null);
             move();
         }
     };
@@ -103,7 +136,10 @@ public class MainActivity extends AppCompatActivity {
                 //player 2 won
                 banner.setImageResource(R.drawable.p2wins);
             }
-            Log.d("STATE","win");
+            //Log.d("STATE","win");
+            for (int g: game) {
+                Log.d("STATE","win"+g);
+            }
         }else{
             //tie
             banner.setImageResource(R.drawable.noonewins);
@@ -113,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
             ImageView tiles  = findViewById(i);
             tiles.setOnClickListener(null);
         }
+        findViewById(R.id.play_again_btn).setVisibility(View.VISIBLE);
+        findViewById(R.id.play_again_btn).setOnClickListener(resetListener);
     }
     private Boolean checkWin(){
         //horizontal checks
